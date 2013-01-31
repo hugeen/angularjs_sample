@@ -2,7 +2,7 @@
 <html lang="en" ng-app>
   <head>
     <meta charset="utf-8">
-    <title>GitHub Repos</title>
+    <title>GitHub Repos Search Engine</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -14,7 +14,12 @@
   <body>
 
     <div class="container" ng-controller="GitHubReposController">
-    	<h1>GitHub Repos</h1>
+    	<h1>GitHub Repos Search Engine</h1>
+    	<h3>Made by <a href="http://www.twitter.com/hugeen">hugeen</a> for <a href="http://hugeen.wordpress.com/">this blog post</a></h3>
+    	<form ng-submit="search()">
+      		<input type="text" ng-model="keyword" size="30" placeholder="search">
+      		<input class="btn-primary" type="submit" value="Search">
+    	</form>
     	<h2>{{repos.length}} results.</h2>
     	<p>
     		Sort by 
