@@ -8,5 +8,6 @@ function GitHubReposController($scope, $http) {
 	$http.get('https://api.github.com/legacy/repos/search/onegameamonth').success(function(data) {
 		$scope.repos = data.repositories;
 	});
-
+	
+	$scope.predicate = 'name';
 }

@@ -8,14 +8,26 @@
     <meta name="author" content="">
     <link href="bootstrap.css" rel="stylesheet">
     <link href="bootstrap-responsive.css" rel="stylesheet">
+    <link href="repos.css" rel="stylesheet">
   </head>
 
   <body>
 
     <div class="container" ng-controller="GitHubReposController">
     	<h1>GitHub Repos</h1>
-    	<li ng-repeat="repo in repos">
-    		{{repo.name}}
+    	<h2>{{repos.length}} results.</h2>
+    	<p>
+    		Sort by 
+    		<a href="" ng-click="sort = 'size'; reverse=!reverse">Size</a> |
+    		<a href="" ng-click="sort = 'forks'; reverse=!reverse">Forks</a> |
+    		<a href="" ng-click="sort = 'name'; reverse=!reverse">Name</a> |
+    		<a href="" ng-click="sort = 'owner'; reverse=!reverse">Owner</a> |
+    		<a href="" ng-click="sort = 'created_at'; reverse=!reverse">Creation Date</a>
+    	</p>
+    	<li ng-repeat="repo in repos | orderBy:sort:reverse">
+    		<div><a href="https://github.com/{{repo.owner}}/{{repo.name}}">{{repo.name}}</a>, <i>{{repo.description}}</i></div>
+    		<div>Created by <a href="https://github.com/{{repo.owner}}">{{repo.owner}}</a> at {{repo.created_at | date:'fullDate'}}</div>
+    		<div>Size: {{repo.size}} - Forks: {{repo.forks}} - Followers: {{repo.followers}} - Watchers: {{repo.watchers}}</div>
     	</li>
 	</div>
     
