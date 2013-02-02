@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app>
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Repos Search Engine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="bootstrap-responsive.css" rel="stylesheet">
+    <link href="repos.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container" ng-controller="GitHubReposController">
+    	<h1>GitHub Repos Search Engine</h1>
+    	<h3>Made by <a href="http://www.twitter.com/hugeen">hugeen</a> for <a href="http://hugeen.wordpress.com/">this blog post</a></h3>
+    	<form ng-submit="search()">
+      		<input type="text" ng-model="keyword" size="30" placeholder="search">
+      		<input class="btn-primary" type="submit" value="Search">
+    	</form>
+    	<h2>{{repos.length}} results.</h2>
+    	<p>
+    		Sort by 
+    		<a href="" ng-click="sort = 'size'; reverse=!reverse">Size</a> |
+    		<a href="" ng-click="sort = 'forks'; reverse=!reverse">Forks</a> |
+    		<a href="" ng-click="sort = 'name'; reverse=!reverse">Name</a> |
+    		<a href="" ng-click="sort = 'owner'; reverse=!reverse">Owner</a> |
+    		<a href="" ng-click="sort = 'created_at'; reverse=!reverse">Creation Date</a>
+    	</p>
+    	<li ng-repeat="repo in repos | orderBy:sort:reverse">
+    		<div><a href="https://github.com/{{repo.owner}}/{{repo.name}}">{{repo.name}}</a>, <i>{{repo.description}}</i></div>
+    		<div>Created by <a href="https://github.com/{{repo.owner}}">{{repo.owner}}</a> at {{repo.created_at | date:'fullDate'}}</div>
+    		<div>Size: {{repo.size}} - Forks: {{repo.forks}} - Followers: {{repo.followers}} - Watchers: {{repo.watchers}}</div>
+    	</li>
+	</div>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+	<script src="repos.js"></script>
+	
+  </body>
+</html>
